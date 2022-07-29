@@ -3,8 +3,9 @@
 # and the board is displayed in between turns.
 
 module TestMessage # module test - convert to something useful?
+  TTT = "Tic Tac Toe" # constant to be used by instances/ both classes
   def working_message(class_string)
-    puts "Module's working for the #{class_string} class!"
+    puts "Module's working for the instance of the #{class_string} class!"
   end
 end
 
@@ -34,12 +35,6 @@ class TictTacToe
     @seventh = @current_board[6]
     @eigth = @current_board[7]
     @ninth = @current_board[8]
-
-    puts "Welcome to Tygh's TIC TAC TOE game!
-    - Youngest person is player 1 (X)
-    - Oldest person is player 2 (O)
-
-  Player 1, enter your pick (0-9) then hit Return!"
   end
 
   public
@@ -80,9 +75,10 @@ class Player
 
   attr_reader :shape # makes it so i can read this later with `.shape`
 
-  def initialize(shape)
+  def initialize(name, shape)
+    @name = name
     @shape = shape
-    puts "new player created"
+    puts "Player #{name} created!"
   end
   
   def turn()
@@ -110,12 +106,25 @@ end
 #   reply = gets.chomp
 # end 
 
+puts "
+\
+\
+Hello and welcome to Tygh's TIC TAC TOE game!"
 newGame = TictTacToe.new
+sleep 1
+puts "Player 1 will be X, please type your name then hit return."
+p1_name = gets.chomp
+player1 = Player.new(p1_name, "X")
+sleep 1
+puts "Player 2 will be O, please type your name then hit return."
+p2_name = gets.chomp
+player2 = Player.new(p2_name, "O")
+sleep 1
+puts "OK, it's #{p1_name} vs. #{p2_name}"
+sleep 1
 
-player1 = Player.new("X")
-player2 = Player.new("O")
-puts player1.shape
-puts player2.shape
+puts player1.shape # this is a test, it's working
+puts player2.shape # this is a test, it's working
 
 newGame.show_board
 
