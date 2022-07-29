@@ -65,15 +65,14 @@ class TictTacToe
     # if no spaces left, announce a tie and offer to play again
   end
 
-  
-
 end
 
 
 class Player
   include TestMessage # module test - convert to something useful?
 
-  attr_reader :shape # makes it so i can read this later with `.shape`
+  attr_accessor :name # now I can read this later with `.name`
+  attr_reader :shape  # now I can read this later with `.shape`
 
   def initialize(name, shape)
     @name = name
@@ -84,12 +83,11 @@ class Player
   def turn()
     # after displaying the new board, get player to enter pick
     # replace the # of their pick with their shape
-    #pick =  1 # later, gets.chomp()
+    # pick =  1 # later, gets.chomp()
     @first = 'X'
     newGame.show_board
   end
   
-
 end
 
 
@@ -120,7 +118,7 @@ puts "Player 2 will be O, please type your name then hit return."
 p2_name = gets.chomp
 player2 = Player.new(p2_name, "O")
 sleep 1
-puts "OK, it's #{p1_name} vs. #{p2_name}"
+puts "OK, it's #{p1_name} vs. #{p2_name}, let's do this!"
 sleep 1
 
 puts player1.shape # this is a test, it's working
@@ -128,5 +126,5 @@ puts player2.shape # this is a test, it's working
 
 newGame.show_board
 
-player1.working_message("Tictactoe")
-newGame.working_message("Player")
+player1.working_message("Tictactoe") # this is a test, it's working
+newGame.working_message("Player") # this is a test, it's working
