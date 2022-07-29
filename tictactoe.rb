@@ -2,8 +2,14 @@
 # where two human players can play against each other 
 # and the board is displayed in between turns.
 
-class TictTacToe
+module TestMessage # module test - convert to something useful?
+  def working_message(class_string)
+    puts "Module's working for the #{class_string} class!"
+  end
+end
 
+class TictTacToe
+  include TestMessage # module test - convert to something useful?
   # instance variables (as symbols) to attr_XYZ.
   attr_reader :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eigth, :ninth
   attr_writer # any here?
@@ -36,7 +42,7 @@ class TictTacToe
   Player 1, enter your pick (0-9) then hit Return!"
   end
 
-  public 
+  public
   # makes the methods below and until `private` accesible from outside the class
 
   # each spot on the board should be string interpolation
@@ -64,10 +70,13 @@ class TictTacToe
     # if no spaces left, announce a tie and offer to play again
   end
 
+  
+
 end
 
 
 class Player
+  include TestMessage # module test - convert to something useful?
 
   attr_reader :shape # makes it so i can read this later with `.shape`
 
@@ -84,6 +93,7 @@ class Player
     newGame.show_board
   end
   
+
 end
 
 
@@ -108,3 +118,6 @@ puts player1.shape
 puts player2.shape
 
 newGame.show_board
+
+player1.working_message("Tictactoe")
+newGame.working_message("Player")
