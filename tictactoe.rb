@@ -30,16 +30,7 @@ class TictTacToe
     @@game_count += 1 # incrementing the class variable to count # games (for practice)
     puts "Starting a new #{TTT} game..." # TTT constant from the module
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9] # array of which chars are printed to the game board 
-    # set initial board positiion values
-    @first = @board[0]
-    @second = @board[1]
-    @third = @board[2]
-    @fourth = @board[3]
-    @fifth = @board[4]
-    @sixth = @board[5]
-    @seventh = @board[6]
-    @eigth = @board[7]
-    @ninth = @board[8]
+    
   end
 
   public # makes the methods below accesible from outside the class, until `private`
