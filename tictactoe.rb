@@ -14,10 +14,13 @@ class TictTacToe
   # instance variables (as symbols) to attr_XYZ.
   attr_reader :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eigth, :ninth
   attr_writer # any here?
-  attr_accessor :current_board
+  attr_accessor :board
 
   @@game_count = 0 # Class variable (for practice)
-  @@winning_combos = [] # if any of the winning combos are 3 of the same, return the winner
+
+  # Constant, if any of the winning combos are 3 of the same, return the winner
+  WINNING_COMBOS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [7,5,3]] 
+  # ^ array poitions are all these -1 so I could do math on the comnbos or create a nested array called WINNING_POSITIONS (Referencing array postions)
   @@available_picks = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   # if a user enters an unpickable number, return an error message
 
@@ -26,17 +29,17 @@ class TictTacToe
     # Gets triggered by the `new` class method.
     @@game_count += 1 # incrementing the class variable to count # games (for practice)
     puts "Starting a new #{TTT} game..." # TTT constant from the module
-    @current_board = [1, 2, 3, 4, 5, 6, 7, 8, 9] # array of board positions
+    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9] # array of which chars are printed to the game board 
     # set initial board positiion values
-    @first = @current_board[0]
-    @second = @current_board[1]
-    @third = @current_board[2]
-    @fourth = @current_board[3]
-    @fifth = @current_board[4]
-    @sixth = @current_board[5]
-    @seventh = @current_board[6]
-    @eigth = @current_board[7]
-    @ninth = @current_board[8]
+    @first = @board[0]
+    @second = @board[1]
+    @third = @board[2]
+    @fourth = @board[3]
+    @fifth = @board[4]
+    @sixth = @board[5]
+    @seventh = @board[6]
+    @eigth = @board[7]
+    @ninth = @board[8]
   end
 
   public # makes the methods below accesible from outside the class, until `private`
@@ -44,23 +47,27 @@ class TictTacToe
   def show_board()
     # each spot on the board should be string interpolation
     # that shows the picks + remaining spots, defaults to the #.
-    puts "|#{first}|#{second}|#{third}|"
+    puts "|#{board[0]}|#{board[1]}|#{board[2]}|"
     puts "-------"
-    puts "|#{fourth}|#{fifth}|#{sixth}|"
+    puts "|#{board[3]}|#{board[4]}|#{board[5]}|"
     puts "-------"
-    puts "|#{seventh}|#{eigth}|#{ninth}|"
-    
+    puts "|#{board[6]}|#{board[7]}|#{board[8]}|"
     winner_check() #calling this to test if I can access private method
   end
 
   private # makes methods below inaccessible from outside the class - see to `public` above
   
   def winner_check
-    puts "Private method accessed!"
+    puts "Private winner_check method accessed!"
     # Compare all winning combos to current board
-    # if match, declare winner
-    # if no match, keep playing
+    # if match, declare winner (show message and no picks, replay?)
+    # if no match, keep playing (next play)
     # if no spaces left, announce a tie and offer to play again
+    
+    # WINNING_COMBOS.each do |win_combo|      
+    #   win_combo.all? { |num| str.size == 'X' || == 'O' }
+    # end
+
   end
 
 end
