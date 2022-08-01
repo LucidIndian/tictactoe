@@ -14,13 +14,12 @@ class TictTacToe
   # instance variables (as symbols) to attr_XYZ.
   attr_reader :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eigth, :ninth
   attr_writer # any here?
-  attr_accessor :board
+  attr_accessor :board, :board_test, :winner
 
   @@game_count = 0 # Class variable (for practice)
-
-  # Constant, if any of the winning combos are 3 of the same, return the winner
-  WINNING_COMBOS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [7,5,3]] 
-  # ^ array poitions are all these -1 so I could do math on the comnbos or create a nested array called WINNING_POSITIONS (Referencing array postions)
+  
+  # Constant (as array positions), if any of the winning combos are 3 of the same, return the winner
+  WINNING_COMBOS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]] 
   @@available_picks = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   # if a user enters an unpickable number, return an error message
 
@@ -29,8 +28,9 @@ class TictTacToe
     # Gets triggered by the `new` class method.
     @@game_count += 1 # incrementing the class variable to count # games (for practice)
     puts "Starting a new #{TTT} game..." # TTT constant from the module
-    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9] # array of which chars are printed to the game board 
-    
+    @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] # array of which chars are printed to the game board 
+    @board_test = ['1', '2', 'X', '4', 'X', '6', 'X', '8', '9']
+    @winner = false
   end
 
   public # makes the methods below accesible from outside the class, until `private`
@@ -55,9 +55,20 @@ class TictTacToe
     # if no match, keep playing (next play)
     # if no spaces left, announce a tie and offer to play again
     
-    # WINNING_COMBOS.each do |win_combo|      
-    #   win_combo.all? { |num| str.size == 'X' || == 'O' }
-    # end
+    WINNING_COMBOS.each do |win_arr_combo|
+      
+      combo_conversion = win_arr_combo.map do |char|
+        board_test[char]
+      end
+  
+      @winner = combo_conversion.all? { |char| char == 'X' || char == 'O' }
+      
+      if @winner == true
+        puts "There'a winner!"
+      end
+        
+      puts "Winner = #{@winner}" 
+    end
 
   end
 
