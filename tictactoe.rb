@@ -18,8 +18,16 @@ class TictTacToe
 
   @@game_count = 0 # Class variable (for practice)
   
-  # Constant (as array positions), if any of the winning combos are 3 of the same, return the winner
-  WINNING_COMBOS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]] 
+  # Constant (as array positions)
+  WINNING_COMBOS = [
+    [0,1,2], 
+    [3,4,5], 
+    [6,7,8], 
+    [0,3,6], 
+    [1,4,7], 
+    [2,5,8], 
+    [0,4,8], 
+    [6,4,2]] 
   @@available_picks = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   # if a user enters an unpickable number, return an error message
 
@@ -34,6 +42,10 @@ class TictTacToe
   end
 
   public # makes the methods below accesible from outside the class, until `private`
+
+  def self.total_number_of_games # Class method to read the class variable
+    @@game_count
+  end
 
   def show_board()
     # each spot on the board should be string interpolation
@@ -56,8 +68,9 @@ class TictTacToe
     # if no spaces left, announce a tie and offer to play again
     
     WINNING_COMBOS.each do |win_arr_combo|
-      
       combo_conversion = win_arr_combo.map do |char|
+        # Next, get picks to change `board``, 
+        # then write below to use the `board` instead of board_test
         board_test[char]
       end
   
@@ -65,15 +78,15 @@ class TictTacToe
       
       if @winner == true
         puts "There'a winner!"
+        else
+         # nothing yet
       end
         
       puts "Winner = #{@winner}" 
+
     end
-
   end
-
 end
-
 
 class Player
   include TestMessage # module test - convert to something useful?
@@ -139,8 +152,11 @@ newGame = TictTacToe.new
 
 newGame.show_board
 
-player1.working_message("Tictactoe") # this is a test, it's working
-newGame.working_message("Player") # this is a test, it's working
+player1.working_message("Tictactoe") # this is a test. Working!
+newGame.working_message("Player") # this is a test. Working!
+puts TictTacToe.total_number_of_games # Calling our class method test. Working!
+
+
 
 # player1.turn
 # player2.turn
@@ -153,3 +169,5 @@ newGame.working_message("Player") # this is a test, it's working
 
 # until winner = true
   # Keep alternating players picking
+
+
