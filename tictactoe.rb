@@ -31,14 +31,15 @@ class TictTacToe
   def initialize (player1_obj, player2_obj)
     @@game_count += 1 # incrementing the class variable to count # games (for practice)
     puts "Starting a new #{TTT} game..." # TTT constant from the module
+    sleep 1.0
     @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] # array of which chars are printed to the game board 
     @board_test = ['1', '2', 'X', '4', 'X', '6', 'X', '8', '9']
     @winner = false
     @player1 = player1_obj # inserting player object for access to attributes within the game
     @player2 = player2_obj # inserting player object for access to attributes within the game
     puts "Player 1, aka #{player1.name} object is loaded..." # test for obj. load is working!
+    sleep 1.0
     puts "Player 2, aka #{player2.name} object is loaded..." # test for obj. load is working!
-
   end
 
   def self.total_number_of_games # Class method to read the class variable
@@ -47,9 +48,38 @@ class TictTacToe
 
   public # makes the methods below accesible from outside the class, until `private`
 
-  def change_board(player_pick)
-    board[player_pick] = "X" # replacing the board number with player's symbol 
+  def start()
+    # after displaying the new board, get player to enter pick
+    # replace the # of their pick with their shape
+    player1_shape = player1.shape
+    player2_shape = player2.shape
+    current_player = player1
+    player_shape = current_player.shape
+    puts "OK player #{current_player.name}, enter your pick # then hit return"
+    player_pick = gets.chomp.to_i - 1 # local variable
+      # write code that errors if it's not available, in the change_board method?
+    puts "player picked #{player_pick + 1}"  # +1 to match board visual, not the array position
+    puts "PLayer's shape is #{player_shape}"
+    sleep 1.0
+    change_board(player_pick, player_shape)
+     # switch current_player after the pick so the next pick is entered in the alternate shape
+    if current_player == player1 
+      current_player = player2
+    else
+      current_player = player1
+    end
+
+    puts "Current player should now be 2?: #{current_player.name}"
+
+  
+  end
+
+
+  def change_board(player_pick, player_shape)
+    
+    board[player_pick] = player_shape # replacing the board number with player's symbol 
     show_board
+  
   end
 
   def show_board()
@@ -104,15 +134,7 @@ class Player
     puts "Good luck, #{name}!"
   end
   
-  def turn()
-    # after displaying the new board, get player to enter pick
-    # replace the # of their pick with their shape
-    puts "OK player #{"1"}, enter your pick # then hit return"
-    player_pick = gets.chomp.to_i - 1 # local variable
-      # write code that errors if it's not available, in the change_board method?
-    puts "player picked #{player_pick + 1}"  # +1 to match board visual, not the array position
-    player_pick # needs to be last so the fxn returns it's value for the next fxn (change_board)
-  end
+  
 
 end# Class end
 
@@ -140,13 +162,12 @@ puts player2.shape # this is a test, it's working
 newGame = TictTacToe.new(player1, player2) # Passing player objects to have access to name and symbol for picks
 
 newGame.show_board
-
-player1.working_message("Tictactoe") # this is a test. Working!
-newGame.working_message("Player") # this is a test. Working!
-puts " This is game ##{TictTacToe.total_number_of_games}" # Calling our class method test. Working!
-
-newGame.change_board(player1.turn)
-newGame.change_board(player2.turn)
+# player1.working_message("Tictactoe") # Test. Working!
+# newGame.working_message("Player") # Test. Working!
+# puts " This is game ##{TictTacToe.total_number_of_games}" # Test. Working! Calling our class method.
+newGame.start
+# newGame.change_board(player1.turn)
+# newGame.change_board(player2.turn)
 # player2.turn
 # player1.turn
 # player2.turn
@@ -172,3 +193,6 @@ newGame.change_board(player2.turn)
 #   puts "New TICTACTOE game? Y/N"
 #   reply = gets.chomp
 # end 
+
+
+-m "Change the current_player after each pick"  -m "Since I'm now inserting the player objects into each instance of TicTacToe, I moved the turn() method into the Tictactoe class, and now it's as if the board accepts picks from players."
