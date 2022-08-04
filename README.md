@@ -12,4 +12,4 @@ How to Use the Project:
 - Paste code with Replit
 
 
-By Tygh Walters (@TyghWalters) July-Aug 2022
+By @TyghWalters July-Aug 2022
