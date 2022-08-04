@@ -1,13 +1,10 @@
 # Tic Tac Toe
-module TestMessage # module test - convert to something useful?
+module TestModule # module test - convert to something useful?
   TTT = "Tic Tac Toe" # constant to be used by instances/ both classes
-  def working_message(class_string)
-    puts "Module's working for the instance of the #{class_string} class!"
-  end
 end
 
 class TictTacToe
-  include TestMessage # module test - convert to something useful?
+  include TestModule # module test - convert to something useful?
   # instance variables (as symbols) to attr_XYZ.
   attr_reader :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eigth, :ninth, :player1, :player2
   attr_writer # any here?
@@ -35,11 +32,8 @@ class TictTacToe
     @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] # array of which chars are printed to the game board 
     @board_test = ['1', '2', 'X', '4', 'X', '6', 'X', '8', '9']
     @winner = false
-    @player1 = player1_obj # inserting player object for access to attributes within the game
-    @player2 = player2_obj # inserting player object for access to attributes within the game
-    puts "Player 1, aka #{player1.name} object is loaded..." # test for obj. load is working!
-    sleep 1.0
-    puts "Player 2, aka #{player2.name} object is loaded..." # test for obj. load is working!
+    @player1 = player1_obj # inserting player object to access attributes within the game
+    @player2 = player2_obj # inserting player object to access attributes within the game
   end
 
   def self.total_number_of_games # Class method to read the class variable
@@ -51,6 +45,8 @@ class TictTacToe
   def start()
     # after displaying the new board, get player to enter pick
     # replace the # of their pick with their shape
+    # until winner = true 
+    # Keep alternating players picking
     player1_shape = player1.shape
     player2_shape = player2.shape
     current_player = player1
@@ -59,7 +55,6 @@ class TictTacToe
     player_pick = gets.chomp.to_i - 1 # local variable
       # write code that errors if it's not available, in the change_board method?
     puts "player picked #{player_pick + 1}"  # +1 to match board visual, not the array position
-    puts "PLayer's shape is #{player_shape}"
     sleep 1.0
     change_board(player_pick, player_shape)
      # switch current_player after the pick so the next pick is entered in the alternate shape
@@ -71,15 +66,11 @@ class TictTacToe
 
     puts "Current player should now be 2?: #{current_player.name}"
 
-  
   end
 
-
   def change_board(player_pick, player_shape)
-    
     board[player_pick] = player_shape # replacing the board number with player's symbol 
     show_board
-  
   end
 
   def show_board()
@@ -96,12 +87,10 @@ class TictTacToe
   private # makes methods below inaccessible from outside the class - see to `public` above
 
   def winner_check
-    puts "Private winner_check method accessed!"
     # Compare all winning combos to current board
     # if match, declare winner (show message and no picks, replay?)
     # if no match, keep playing (next play)
     # if no spaces left, announce a tie and offer to play again
-
     WINNING_COMBOS.each do |win_arr_combo|
       combo_conversion = win_arr_combo.map do |char|
         # Next, get picks to change `board``, 
@@ -116,15 +105,13 @@ class TictTacToe
         else
          # nothing yet
       end
-
-      puts "Winner = #{@winner}" 
     end
 
   end 
 end # Class end
 
 class Player
-  include TestMessage # module test - convert to something useful?
+  include TestModule # module test - convert to something useful?
   attr_accessor :name # now I can read this later with `.name`
   attr_reader :shape  # now I can read this later with `.shape`
 
@@ -135,8 +122,7 @@ class Player
   end
   
   
-
-end# Class end
+end # Class end
 
 
 # GAME START SEQUENCE
@@ -156,30 +142,11 @@ sleep 1
 puts "OK, it's #{p1_name} vs. #{p2_name}, let's do this!"
 sleep 1
 
-puts player1.shape # this is a test, it's working
-puts player2.shape # this is a test, it's working
-
 newGame = TictTacToe.new(player1, player2) # Passing player objects to have access to name and symbol for picks
 
 newGame.show_board
-# player1.working_message("Tictactoe") # Test. Working!
-# newGame.working_message("Player") # Test. Working!
-# puts " This is game ##{TictTacToe.total_number_of_games}" # Test. Working! Calling our class method.
+puts "This is game ##{TictTacToe.total_number_of_games}" # Test. Working! Calling our class method.
 newGame.start
-# newGame.change_board(player1.turn)
-# newGame.change_board(player2.turn)
-# player2.turn
-# player1.turn
-# player2.turn
-# player1.turn
-# player2.turn
-
-# ^ I could write it like this or refeactor into a conditional loop:
-
-# until winner = true
-  # Keep alternating players picking
-
-
 
   # puts "New TICTACTOE game? Y/N"
 # reply = gets.chomp
@@ -193,6 +160,3 @@ newGame.start
 #   puts "New TICTACTOE game? Y/N"
 #   reply = gets.chomp
 # end 
-
-
--m "Change the current_player after each pick"  -m "Since I'm now inserting the player objects into each instance of TicTacToe, I moved the turn() method into the Tictactoe class, and now it's as if the board accepts picks from players."
