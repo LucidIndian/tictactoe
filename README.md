@@ -7,8 +7,9 @@ Project URL:
 
 How to Use the Project: 
 
-- Run code in IRB, run file from the command line, or with Replit.
+- Run code in IRB
+- Run from the command line:  $ ruby tictactoe.rb 
+- Paste code with Replit
 
 
-
-By Tygh Walters (@TyghWalters) July 2022
+By Tygh Walters (@TyghWalters) July-Aug 2022
