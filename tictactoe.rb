@@ -8,7 +8,7 @@ class TictTacToe
   # instance variables (as symbols) to attr_XYZ.
   attr_reader :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eigth, :ninth, :player1, :player2
   attr_writer # any here?
-  attr_accessor :board, :board_test, :winner
+  attr_accessor :board, :board_test, :winner, :current_player
 
   @@game_count = 0 # Class variable (for practice)
 
@@ -34,6 +34,7 @@ class TictTacToe
     @winner = false
     @player1 = player1_obj # inserting player object to access attributes within the game
     @player2 = player2_obj # inserting player object to access attributes within the game
+    @current_player = player1
   end
 
   def self.total_number_of_games # Class method to read the class variable
@@ -49,13 +50,12 @@ class TictTacToe
     # Keep alternating players picking
     player1_shape = player1.shape
     player2_shape = player2.shape
-    current_player = player1
     player_shape = current_player.shape
     puts "OK player #{current_player.name}, enter your pick # then hit return"
     player_pick = gets.chomp.to_i - 1 # local variable
       # write code that errors if it's not available, in the change_board method?
     puts "player picked #{player_pick + 1}"  # +1 to match board visual, not the array position
-    sleep 1.0
+    sleep 0.5
     change_board(player_pick, player_shape)
      # switch current_player after the pick so the next pick is entered in the alternate shape
     if current_player == player1 
@@ -118,7 +118,7 @@ class Player
   def initialize(name, shape)
     @name = name
     @shape = shape
-    puts "Good luck, #{name}!"
+    puts "Good luck, #{name}"
   end
   
   
@@ -148,7 +148,7 @@ newGame.show_board
 puts "This is game ##{TictTacToe.total_number_of_games}" # Test. Working! Calling our class method.
 newGame.start
 
-  # puts "New TICTACTOE game? Y/N"
+# puts "New TICTACTOE game? Y/N"
 # reply = gets.chomp
 # while reply == "Y" 
 #   puts "great!"
@@ -159,4 +159,4 @@ newGame.start
 #   sleep (1)
 #   puts "New TICTACTOE game? Y/N"
 #   reply = gets.chomp
-# end 
+# end
